@@ -1,0 +1,13 @@
+version: '3'
+services:
+  apigateway:
+    image: gwangjang/apigateway
+    depends_on:
+      - eureka
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka/
+    ports:
+      - 8888:8888
+    networks:
+      - msa-network
+    build: ./ApiGateway
