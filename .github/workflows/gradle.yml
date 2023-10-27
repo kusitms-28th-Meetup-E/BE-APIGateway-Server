@@ -30,10 +30,10 @@ jobs:
         echo "${{ secrets.APPLICATION }}" > ./application.yml
 
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: sudo chmod +x gradlew
 
     - name: Build with Gradle
-      run: ./gradlew build -x test
+      run: sudo ./gradlew build -x test
 
     - name: Docker build
       run: |
