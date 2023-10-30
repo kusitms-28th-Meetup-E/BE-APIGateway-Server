@@ -29,10 +29,10 @@
           APPLICATION: ${{ secrets.APPLICATION }}
           
       - name: Grant execute permission for gradlew
-        run: sudo chmod +x gradlew
+        run: chmod +x gradlew
   
       - name: Build with Gradle
-        run: sudo ./gradlew build -x test
+        run: ./gradlew build -x test
   
       - name: Docker build
         run: |
