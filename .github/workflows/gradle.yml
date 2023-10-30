@@ -50,5 +50,9 @@
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/apigateway:latest
             docker image prune -a -f
-            docker-compose up -d
-     
+            docker run -d --name apigateway \
+            --depends-on eureka \
+            -e EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/ \
+            -p 8888:8888 \
+            --network msa-network \
+            ${{ secrets.DOCKER_USERNAME }}/apigateway:latest
