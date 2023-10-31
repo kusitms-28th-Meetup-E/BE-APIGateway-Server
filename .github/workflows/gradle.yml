@@ -51,9 +51,6 @@
             # Pull the latest Docker image
             docker pull ${{ secrets.DOCKER_USERNAME }}/apigateway:latest
             docker image prune -a -f
-            while [ "$(docker inspect -f '{{.State.Health.Status}}' ${{ secrets.DOCKER_USERNAME }}/eureka)" != "healthy" ]; do
-              sleep 5
-            done
             docker run -d --name apigateway \
               -e EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/ \
               -p 8888:8888 \
