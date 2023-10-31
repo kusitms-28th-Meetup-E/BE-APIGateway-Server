@@ -61,4 +61,5 @@
             # Pull the latest Docker image
             docker pull ${{ secrets.DOCKER_USERNAME }}/apigateway:latest
             docker image prune -a -f
+            docker-compose -f docker-compose-gateway.yml down
             docker-compose -f docker-compose-gateway.yml up -d
