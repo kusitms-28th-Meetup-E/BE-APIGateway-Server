@@ -11,35 +11,41 @@ import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
+
 public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Config> {
 
-    public GlobalFilter() {
+    public GlobalFilter(){
         super(Config.class);
     }
 
     @Override
     public GatewayFilter apply(Config config) {
-        // Custom Pre Filter
         return (exchange, chain) -> {
-            ServerHttpRequest request = exchange.getRequest();
+            ServerHttpRequest request = exchange.getRequest(); // reactive포함된거로 import
             ServerHttpResponse response = exchange.getResponse();
 
-            log.info("Global filter baseMessage -> {}", config.getBaseMessage());
-            if (config.isPreLogger()) {
-                log.info("Global Filter Start: request id -> {}", request.getId());
+            log.info("Global com.example.scg.filter baseMessgae: {}", config.getBaseMessage());
+
+            // Global pre Filter
+            if (config.isPreLogger()){
+                log.info("Global Filter Start: request id -> {}" , request.getId());
+                log.info("Global Filter Start: request path -> {}" , request.getPath());
             }
 
-            // Custom Post Filter
-            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-                if (config.isPostLogger()) {
-                    log.info("Global POST filter end: response code -> {}", response.getStatusCode());
+            // Global Post Filter
+            //Mono는 webflux에서 단일값 전송할때 Mono값으로 전송
+            return chain.filter(exchange).then(Mono.fromRunnable(()->{
+
+                if (config.isPostLogger()){
+                    log.info("Global Filter End: response status code -> {}" , response.getStatusCode());
                 }
             }));
+
         };
     }
 
     @Data
-    public static class Config{
+    public static class Config {
         private String baseMessage;
         private boolean preLogger;
         private boolean postLogger;
