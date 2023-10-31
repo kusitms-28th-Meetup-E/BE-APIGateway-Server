@@ -51,7 +51,7 @@
             # Pull the latest Docker image
             docker pull ${{ secrets.DOCKER_USERNAME }}/apigateway:latest
             docker image prune -a -f
-            while [ "$(docker inspect -f '{{.State.Health.Status}}' eureka)" != "healthy" ]; do
+            while [ "$(docker inspect -f '{{.State.Health.Status}}' ${{ secrets.DOCKER_USERNAME }}/eureka)" != "healthy" ]; do
               sleep 5
             done
             docker run -d --name apigateway \
