@@ -40,6 +40,16 @@
           docker build -t app .
           docker tag app ${{ secrets.DOCKER_USERNAME }}/apigateway:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/apigateway:latest
+          
+      - name: docker-compose.yml 
+        uses: appleboy/scp-action@master
+        with:
+            username: ec2-user
+            host: ${{ secrets.HOST }}
+            key: ${{ secrets.PRIVATE_KEY }}
+            port: ${{ secrets.PORT }}
+            source: "./docker-compose-gateway.yml"
+            target: "/home/ec2-user/"  
             
       - name: Deploy
         uses: appleboy/ssh-action@master
