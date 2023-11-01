@@ -1,9 +1,9 @@
-package gwangjang.server.handler;
+package gwangjang.server.exception;
 
 import gwangjang.server.response.ErrorCode;
 import org.springframework.http.HttpStatus;
 
-public abstract class ApplicationException extends Throwable {
+public abstract class ApplicationException extends RuntimeException {
 
     private final ErrorCode errorCode;
     private final HttpStatus httpStatus;

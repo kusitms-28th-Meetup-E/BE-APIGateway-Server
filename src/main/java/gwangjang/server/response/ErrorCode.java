@@ -16,6 +16,7 @@ public enum ErrorCode {
     UNSUPPORTED_TOKEN("402","지원되지 않는 토큰입니다."),
     INVALID_TOKEN("402","토큰이 잘못되었습니다."),
     INVALID_JWT_TOKEN("402","잘못된 JWT 서명입니다."),
+    NOT_FOUND_JWT_TOKEN("402","JWT 토큰이 없습니다."),
 
     //FCM 토큰 관련
     INITIALIZE_ERROR("F0001", "Firebase Admin SDK 초기화에 실패했습니다."),

@@ -66,9 +66,6 @@ public class JwtTokenProvider {
         return claims;
     }
 
-
-
-
     public String getUserId(String token) {
         return getClaimsFromJwtToken(token).getSubject();
     }
@@ -94,7 +91,7 @@ public class JwtTokenProvider {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             log.info("잘못된 JWT 서명입니다.");
-            throw e;
+            throw e ;
         } catch (ExpiredJwtException e) {
             log.info("만료된 JWT 토큰입니다.");
             throw e;

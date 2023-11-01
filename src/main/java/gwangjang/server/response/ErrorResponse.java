@@ -13,39 +13,27 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class ErrorResponse<T> {
     private Boolean isSuccess;
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    private LocalDateTime timeStamp;
+//    private LocalDateTime timeStamp;
     private String errorCode;
     private String message;
 
     public ErrorResponse(String errorCode, String message) {
         this.isSuccess=false;
-        this.timeStamp = LocalDateTime.now().withNano(0);
+//        this.timeStamp = LocalDateTime.now().withNano(0);
         this.errorCode = errorCode;
         this.message = message;
     }
 
     public ErrorResponse(ErrorCode errorCode, String message) {
         this.isSuccess=false;
-        this.timeStamp = LocalDateTime.now().withNano(0);
+//        this.timeStamp = LocalDateTime.now().withNano(0);
         this.errorCode=errorCode.getErrorCode();
         this.message=message;
     }
     public ErrorResponse(ErrorCode errorCode) {
         this.isSuccess=false;
-        this.timeStamp = LocalDateTime.now().withNano(0);
+//        this.timeStamp = LocalDateTime.now().withNano(0);
         this.errorCode=errorCode.getErrorCode();
         this.message=errorCode.getMessage();
-    }
-
-    @Override
-    public String toString() {
-        return "ErrorResponse{" +
-                "isSuccess=" + isSuccess +
-                ", timeStamp=" + timeStamp +
-                ", errorCode='" + errorCode + '\'' +
-                ", message='" + message + '\'' +
-                '}';
     }
 }
