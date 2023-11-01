@@ -1,4 +1,4 @@
-package gwangjang.server.response;
+package gwangjang.server.global.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,15 +8,15 @@ import lombok.Getter;
 public enum ErrorCode {
 
     BAD_REQUEST("400", "입력값이 유효하지 않습니다."),
-    UNAUTHORIZED("403", "권한이 없습니다."),
+    UNAUTHORIZED("401", "권한이 없습니다."),
     METHOD_NOT_ALLOWED("405", "클라이언트가 사용한 HTTP 메서드가 리소스에서 허용되지 않습니다."),
     INTERNAL_SERVER_ERROR("500", "서버에서 요청을 처리하는 동안 오류가 발생했습니다."),
     NOT_FOUND_REFRESH_TOKEN_ERROR( "J0008",  "유효하지 않는 RefreshToken 입니다."),
-    EXPIRED_JWT("402","만료된 Jwt 토큰입니다."),
-    UNSUPPORTED_TOKEN("402","지원되지 않는 토큰입니다."),
-    INVALID_TOKEN("402","토큰이 잘못되었습니다."),
-    INVALID_JWT_TOKEN("402","잘못된 JWT 서명입니다."),
-    NOT_FOUND_JWT_TOKEN("402","JWT 토큰이 없습니다."),
+    EXPIRED_JWT("401","만료된 Jwt 토큰입니다."),
+    UNSUPPORTED_TOKEN("401","지원되지 않는 토큰입니다."),
+    INVALID_TOKEN("401","토큰이 잘못되었습니다."),
+    INVALID_JWT_TOKEN("401","잘못된 JWT 서명입니다."),
+    NOT_FOUND_JWT_TOKEN("401","JWT 토큰이 없습니다."),
 
     //FCM 토큰 관련
     INITIALIZE_ERROR("F0001", "Firebase Admin SDK 초기화에 실패했습니다."),

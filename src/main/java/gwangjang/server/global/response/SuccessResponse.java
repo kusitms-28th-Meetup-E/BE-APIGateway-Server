@@ -1,4 +1,4 @@
-package gwangjang.server.response;
+package gwangjang.server.global.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
