@@ -14,7 +14,6 @@ import reactor.core.publisher.Mono;
 
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "API Gateway", version = "1.0", description = "Gwang-Jang API Gateway v1.0"))
 public class ApiGatewayApplication {
 
     public static void main(String[] args) {
