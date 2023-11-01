@@ -2,8 +2,6 @@ package gwangjang.server;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gwangjang.server.global.exception.GlobalExceptionHandler;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
