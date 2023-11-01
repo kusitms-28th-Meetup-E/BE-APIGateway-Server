@@ -1,4 +1,4 @@
-package gwangjang.server.exception;
+package gwangjang.server.global.exception;
 
 public class InternalServerErrorException extends RuntimeException{
 

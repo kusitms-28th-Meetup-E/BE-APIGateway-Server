@@ -1,9 +1,7 @@
 package gwangjang.server;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import gwangjang.server.filter.AuthorizationHeaderFilter;
-import gwangjang.server.handler.GlobalExceptionHandler;
-import gwangjang.server.security.JwtTokenProvider;
+import gwangjang.server.global.exception.GlobalExceptionHandler;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;

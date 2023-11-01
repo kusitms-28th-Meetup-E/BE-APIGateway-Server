@@ -1,6 +1,6 @@
-package gwangjang.server.exception;
+package gwangjang.server.global.exception;
 
-import gwangjang.server.response.ErrorCode;
+import gwangjang.server.global.response.ErrorCode;
 import org.springframework.http.HttpStatus;
 
 public abstract class ApplicationException extends RuntimeException {

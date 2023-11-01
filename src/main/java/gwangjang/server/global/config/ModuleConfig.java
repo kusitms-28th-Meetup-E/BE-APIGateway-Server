@@ -1,4 +1,4 @@
-package gwangjang.server.handler;
+package gwangjang.server.global.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

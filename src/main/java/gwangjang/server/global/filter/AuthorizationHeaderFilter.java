@@ -1,17 +1,14 @@
-package gwangjang.server.filter;
+package gwangjang.server.global.filter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import gwangjang.server.response.ErrorCode;
-import gwangjang.server.response.ErrorResponse;
-import gwangjang.server.response.SuccessResponse;
-import gwangjang.server.security.JwtTokenProvider;
+import gwangjang.server.global.response.ErrorCode;
+import gwangjang.server.global.response.ErrorResponse;
+import gwangjang.server.global.response.SuccessResponse;
+import gwangjang.server.global.jwt.JwtTokenProvider;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.InvalidClaimException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -20,16 +17,17 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-import java.util.NoSuchElementException;
+import java.util.regex.PatternSyntaxException;
 
 @Component
 @Slf4j
@@ -38,13 +36,12 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
     private final JwtTokenProvider jwtTokenProvider;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Autowired
     public AuthorizationHeaderFilter(JwtTokenProvider jwtTokenProvider) {
         super(Config.class);
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    static class Config {
+    public static class Config {
 
     }
 
@@ -95,6 +92,8 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
     // Mono(단일 값), Flux(다중 값) -> Spring WebFlux
     private Mono<Void> onError(ServerWebExchange exchange, Class<? extends Throwable> exceptionClass) {
 
+        log.info("AuthrizationHeaderFilter start -> {}");
+
         ServerHttpResponse response =  exchange.getResponse();
 
         Object responseBody = new HashMap<>();
@@ -123,6 +122,27 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
             responseBody = new ErrorResponse<>(ErrorCode.NOT_FOUND_JWT_TOKEN);
+
+        } else if (exceptionClass == HttpRequestMethodNotSupportedException .class){
+            exchange.getResponse().setStatusCode(HttpStatus.METHOD_NOT_ALLOWED);
+            exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
+            responseBody = new ErrorResponse<>(ErrorCode.METHOD_NOT_ALLOWED);
+
+        } else if (exceptionClass == Exception.class){
+            exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
+            responseBody = new ErrorResponse<>(ErrorCode.INTERNAL_SERVER_ERROR);
+
+        } else if (exceptionClass == HttpMessageNotReadableException .class){
+            exchange.getResponse().setStatusCode(HttpStatus.BAD_REQUEST);
+            exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
+            responseBody = new ErrorResponse<>(ErrorCode.BAD_REQUEST);
+
+        } else if (exceptionClass == PatternSyntaxException .class ){
+            exchange.getResponse().setStatusCode(HttpStatus.BAD_REQUEST);
+            exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
+            responseBody = new ErrorResponse<>(ErrorCode.BAD_REQUEST);
+
         }
         // 성공 시
         else {

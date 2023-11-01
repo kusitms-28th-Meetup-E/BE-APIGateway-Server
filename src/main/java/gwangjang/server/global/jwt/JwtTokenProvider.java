@@ -1,4 +1,4 @@
-package gwangjang.server.security;
+package gwangjang.server.global.jwt;
 
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Component
 @Slf4j
