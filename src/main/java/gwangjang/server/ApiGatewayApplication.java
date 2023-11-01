@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import gwangjang.server.filter.AuthorizationHeaderFilter;
 import gwangjang.server.handler.GlobalExceptionHandler;
 import gwangjang.server.security.JwtTokenProvider;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
@@ -14,6 +16,7 @@ import reactor.core.publisher.Mono;
 
 
 @SpringBootApplication
+@OpenAPIDefinition(info = @Info(title = "API Gateway", version = "1.0", description = "Gwang-Jang API Gateway v1.0"))
 public class ApiGatewayApplication {
 
     public static void main(String[] args) {
