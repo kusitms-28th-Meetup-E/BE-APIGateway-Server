@@ -8,9 +8,10 @@ import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import reactor.core.publisher.Mono;
 
-
+@CrossOrigin("*")
 @SpringBootApplication
 public class ApiGatewayApplication {
 
