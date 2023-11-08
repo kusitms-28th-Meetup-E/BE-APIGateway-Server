@@ -58,25 +58,19 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
                 return onError(exchange, NoSuchFieldException.class);
             }
 
-            log.info("authorizationHeader.get-start");
             String authorizationHeader = headers.get(HttpHeaders.AUTHORIZATION).get(0);
-            log.info("authorizationHeader.get-end");
 
-            log.info("validateJwtToken-start");
             // JWT 토큰 판별
             String token = authorizationHeader.replace("Bearer", "");
 
             jwtTokenProvider.validateJwtToken(token);
-            log.info("validateJwtToken-end");
 
-            log.info("jwtTokenProvider.getUserId-start");
 
             String subject = jwtTokenProvider.getUserId(token);
 
 //            if (!jwtTokenProvider.getRoles(token).contains("USER")) {
 //                return onError(exchange, "권한 없음", HttpStatus.BAD_REQUEST);
 //            }
-            log.info("jwtTokenProvider.getUserId-end");
 
             ServerHttpRequest newRequest = request.mutate()
                     .header("user-id", subject)
