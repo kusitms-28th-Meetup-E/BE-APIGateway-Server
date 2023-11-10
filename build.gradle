@@ -48,6 +48,12 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
+    implementation 'org.springdoc:springdoc-openapi-webflux-core:1.5.13'
+    implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.5.13'
+    // Springfox Swagger2 라이브러리
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    // Springfox Swagger UI (옵션)
+    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 
 
 
