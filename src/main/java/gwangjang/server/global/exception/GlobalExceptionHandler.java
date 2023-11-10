@@ -27,6 +27,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
+
 @Slf4j
 @RequiredArgsConstructor
 public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
@@ -35,8 +36,7 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
 
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
-
-        log.info("GlobalExceptionHandler start -> {}");
+        log.error("GlobalExceptionHandler start -> {}", ex.getMessage(), ex);
 
         ServerHttpResponse response =  exchange.getResponse();
         Class<? extends Throwable> exceptionClass = ex.getClass();
@@ -105,6 +105,4 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
         response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
         return exchange.getResponse().writeWith(Flux.just(wrap));
     }
-
-
 }
