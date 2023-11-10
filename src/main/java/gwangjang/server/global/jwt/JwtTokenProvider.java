@@ -112,4 +112,9 @@ public class JwtTokenProvider {
         return refreshTokenId.equals(compareToken);
     }
 
+    public String getSocialId(String token) {
+        log.info("getsocialId! ->{}",Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject());
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+    }
+
 }

@@ -6,6 +6,7 @@
 //import org.springframework.web.reactive.config.EnableWebFlux;
 //import org.springframework.web.reactive.config.WebFluxConfigurer;
 //import org.springframework.web.reactive.config.WebFluxConfigurerComposite;
+//
 //@EnableWebFlux
 //@Configuration
 //public class WebFluxConfig {
@@ -16,7 +17,7 @@
 //
 //            @Override
 //            public void addCorsMappings(CorsRegistry registry) {
-//                registry.addMapping("/**")
+//                registry.addMapping("http://localhost:5173")
 //                        .allowedOrigins("*")
 //                        .allowedMethods("*");
 //            }

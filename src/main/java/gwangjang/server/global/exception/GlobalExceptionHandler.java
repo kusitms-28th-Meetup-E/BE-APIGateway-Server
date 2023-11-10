@@ -68,12 +68,7 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
             exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
             responseBody = new ErrorResponse<>(ErrorCode.METHOD_NOT_ALLOWED);
 
-        } else if (exceptionClass == Exception.class){
-            exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
-            exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
-            responseBody = new ErrorResponse<>(ErrorCode.INTERNAL_SERVER_ERROR);
-
-        } else if (exceptionClass == HttpMessageNotReadableException.class){
+        }  else if (exceptionClass == HttpMessageNotReadableException.class){
             exchange.getResponse().setStatusCode(HttpStatus.BAD_REQUEST);
             exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
             responseBody = new ErrorResponse<>(ErrorCode.BAD_REQUEST);
@@ -83,7 +78,13 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
             exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
             responseBody = new ErrorResponse<>(ErrorCode.BAD_REQUEST);
 
+        } else if (exceptionClass == Exception.class){
+            exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
+            responseBody = new ErrorResponse<>(ErrorCode.INTERNAL_SERVER_ERROR);
+
         }
+
         // 성공 시 ??
         else {
             exchange.getResponse().setStatusCode(exchange.getResponse().getStatusCode());
