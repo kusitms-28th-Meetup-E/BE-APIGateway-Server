@@ -65,8 +65,8 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 
             jwtTokenProvider.validateJwtToken(token);
 
-
-            String subject = jwtTokenProvider.getUserId(token);
+//            String subject = jwtTokenProvider.getUserId(token);
+            String subject = jwtTokenProvider.getSocialId(token);
 
 //            if (!jwtTokenProvider.getRoles(token).contains("USER")) {
 //                return onError(exchange, "권한 없음", HttpStatus.BAD_REQUEST);
