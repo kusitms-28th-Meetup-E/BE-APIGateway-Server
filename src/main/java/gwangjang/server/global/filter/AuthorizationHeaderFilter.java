@@ -153,9 +153,9 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
             byte[] bytes = objectMapper.writeValueAsBytes(responseBody);
             wrap = exchange.getResponse().bufferFactory().wrap(bytes);
         } catch (JsonProcessingException e) {
-            log.error("Error while processing JSON response:", e);
+            e.printStackTrace();
         }
-
+        response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
         return exchange.getResponse().writeWith(Flux.just(wrap));
     }
 

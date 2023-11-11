@@ -32,20 +32,14 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
                 log.info("Global Filter Start: request path -> {}" , request.getPath());
             }
 
-            // 예제: /token/** 경로에 대한 요청일 때만 실행
-            if (request.getPath().toString().startsWith("/token/")) {
-                log.info("Global com.example.scg.filter baseMessgae: {}", config.getBaseMessage());
-                // Your global filter logic here
+            // Global Post Filter
+            //Mono는 webflux에서 단일값 전송할때 Mono값으로 전송
+            return chain.filter(exchange).then(Mono.fromRunnable(()->{
 
-                //Mono는 webflux에서 단일값 전송할때 Mono값으로 전송
-                return chain.filter(exchange).then(Mono.fromRunnable(() -> {
+                if (config.isPostLogger()){
                     log.info("Global Filter End: response status code -> {}" , response.getStatusCode());
-                }));
-            } else {
-                // /token/** 경로가 아니면 그냥 다음 필터로 이동
-                return chain.filter(exchange);
-            }
-
+                }
+            }));
 
         };
     }
