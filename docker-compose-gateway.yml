@@ -5,7 +5,7 @@ services:
     depends_on:
       - eureka
     environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://3.34.93.53:8761/eureka/
     ports:
       - 8888:8888
     networks:
