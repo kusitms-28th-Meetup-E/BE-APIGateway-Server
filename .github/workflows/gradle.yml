@@ -61,4 +61,4 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/apigateway:latest
             docker image prune -a -f
             docker stop apigateway
-            docker-compose -f docker-compose-gateway up -d
+            docker-compose -f docker-compose-gateway.yml up -d
