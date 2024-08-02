@@ -11,13 +11,6 @@ services:
     networks:
       - msa-network
 
-  eureka:
-    image: gwangjang/eureka:latest
-    ports:
-      - 8761:8761 # Eureka 서비스 포트 설정
-    networks:
-      - msa-network
-
 networks:
   msa-network:
 
